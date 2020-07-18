@@ -1,0 +1,39 @@
+<h1>Team IPL-2020</h1>
+<div class="row mt-3">
+
+  <div class="col-md-6">
+    <select class="form-control" #name (change)="fetchTeamDetails(name.value)">
+      <option value="">Select Team</option>
+      <option *ngFor="let label of teamLabels">{{label}}</option>
+    </select>
+    <div *ngIf="players.length > 0" class="mt-2">
+      <table class="table hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Price</th>
+          </tr>
+          <tr *ngFor="let player of players">
+            <td>{{player.name}}</td>
+            <td>{{player.role | uppercase}}</td>
+            <td>{{player.price | currency: '$'}}</td>
+          </tr>
+
+        </thead>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="pieChartData && pieChart" class="mt-5">
+      <google-chart [data]="pieChart" (chartSelect)="select($event)"></google-chart>
+    </div>
+      <div *ngIf="tableChartData && tableChart" class="mt-10">
+        <google-chart [data]="tableChart"></google-chart>
+      </div>
+    </div>
+  </div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+    <p style="color: white">Please Wait. </p>  
+</ngx-spinner>  
